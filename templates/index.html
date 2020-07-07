@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Kris Movie Meter</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+</style>
+
+</head>
+
+<body> 
+
+    <nav class="navbar navbar-light bg-light">
+      <h3><a style="color:rgb(240,128,128);font-size:18px;" class="nav-link" href="/">Home</a></h3>
+    </nav>
+
+<body>
+ <div class="login">
+	<h1 class=title>Movie Recommender</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+		<input type="text"  id ="inputmovie" name="u" placeholder="movie" required="required" autocomplete="on" class="searchbar" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+<br/>
+<br/>
+  <span id="movie">{{Passmessage}} {{currentmovie}}</span>
+  <span id="movie">{{Message}}</span>
+<ul style = "font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
+ 
+{% for rows in suggestions %}
+    <li>
+<div>
+    <a href={{rows[2]}} target=_blank;> <img src={{ rows[2] }}   > </img></a>
+<br/>
+    <td> <a href="{{ rows[1] }}" target="_blank"> {{ rows[0] }} </a> </td>
+    
+<br/>
+</div>
+<br/>
+    </li>
+{% endfor %}
+
+</ul>
+   <style>
+
+   ul li {
+  
+  display:inline-block;
+  list-style:none;
+padding: 10px;
+   }
+ul
+{
+margin-left: 20%;
+width:60%;
+}
+body{
+background-color:azure;
+
+}
+.title
+{
+text-align:center;
+}
+.searchbar
+{
+align-self: center;
+width: 60%;
+margin-left: 20%
+
+}
+#movie
+{
+    margin-left: 20%;
+    font-size: larger;
+    font-weight: bold;
+
+}
+.fa
+{
+margin-top:2%;
+}
+   </style>
+  
+
+ </div>
+ 
+
+<!-- Add font awesome icons -->
+<a href="https://www.instagram.com/our_travel_postcards" target=_blank; class="fa fa-instagram"></a>
+</body>
+</html>
+
