@@ -10,7 +10,7 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import json
 import requests
-import wikipedia
+
 
 
 # In[ ]:
