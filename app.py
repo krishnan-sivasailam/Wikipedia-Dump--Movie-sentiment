@@ -12,13 +12,6 @@ import simplejson
 import requests
 import alternate.py
 
-with open('found_movies.ndjson') as fin:
-    movies = [simplejson.loads(l) for l in fin]
-
-# Remove non-movie articles
-movies_with_wikipedia = [movie for movie in movies if 'Wikipedia:' in movie[0]]
-movies = [movie for movie in movies if 'Wikipedia:' not in movie[0]]
-
 
 movie_to_idx=pickle.load(open('movie_to_idx.pickle','rb'))
 link_to_idx =pickle.load(open('link_to_idx.pickle','rb'))
