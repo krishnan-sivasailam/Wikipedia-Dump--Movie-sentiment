@@ -28,4 +28,4 @@ pandas==1.0.5
 mwparserfromhell==0.5.4
 beautifulsoup4==4.9.0
 json==2.0.9
-requests=2.24.0
+requests==2.24.0
