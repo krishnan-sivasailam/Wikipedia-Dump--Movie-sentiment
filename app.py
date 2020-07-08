@@ -22,18 +22,20 @@ app = Flask(__name__)
 # In[ ]:
 
 
-movie_to_idx=pickle.load(open('E:/Movie project/movie_to_idx.pickle','rb'))
-link_to_idx =pickle.load(open('E:/Movie project/link_to_idx.pickle','rb'))
-idx_to_movie=pickle.load(open('E:/Movie project/idx_to_movie.pickle','rb'))
-normalized_movies=pickle.load(open('E:/Movie project/normalized_movies.pkl','rb'))
-movie_lengths=pickle.load(open('E:/Movie project/movie_lengths.pkl','rb'))
-movie_weights=pickle.load(open('E:/Movie project/movie_weights.pkl','rb'))
+movie_to_idx=pickle.load(open('movie_to_idx.pickle','rb'))
+link_to_idx =pickle.load(open('link_to_idx.pickle','rb'))
+idx_to_movie=pickle.load(open('idx_to_movie.pickle','rb'))
+normalized_movies=pickle.load(open('normalized_movies.pkl','rb'))
+movie_lengths=pickle.load(open('movie_lengths.pkl','rb'))
+movie_weights=pickle.load(open('movie_weights.pkl','rb'))
+
+
 
 
 # In[ ]:
 
 
-with open('E:/Movie project/found_movies.ndjson') as fin:
+with open('found_movies.ndjson') as fin:
     movies = [json.loads(l) for l in fin]
 
 # Remove non-movie articles
