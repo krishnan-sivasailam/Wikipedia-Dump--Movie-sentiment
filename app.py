@@ -10,7 +10,7 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import simplejson
 import requests
-import alternate.py
+
 
 
 movie_to_idx=pickle.load(open('movie_to_idx.pickle','rb'))
@@ -84,6 +84,13 @@ def masterlist(movie):
 
 
 # In[ ]:
+
+with open('found_movies.ndjson') as fin:
+    movies = [simplejson.loads(l) for l in fin]
+
+# Remove non-movie articles
+movies_with_wikipedia = [movie for movie in movies if 'Wikipedia:' in movie[0]]
+movies = [movie for movie in movies if 'Wikipedia:' not in movie[0]]
 
 
 @app.route('/')
