@@ -10,6 +10,7 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import simplejson
 import requests
+import alternate.py
 
 with open('found_movies.ndjson') as fin:
     movies = [simplejson.loads(l) for l in fin]
