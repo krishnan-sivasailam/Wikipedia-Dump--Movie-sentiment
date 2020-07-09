@@ -8,11 +8,9 @@ import pandas as pd
 import numpy as np
 from flask import Flask, jsonify, request, render_template
 import pickle
-import simplejson
 import requests
-import json
 
-
+movies=pd.read_csv("wikimovie.csv",encoding = "ISO-8859-1")
 
 movie_to_idx=pickle.load(open('movie_to_idx.pickle','rb'))
 link_to_idx =pickle.load(open('link_to_idx.pickle','rb'))
@@ -28,7 +26,6 @@ app = Flask(__name__)
 
 
 # In[ ]:
-
 
 def masterlist(movie):
     dists = np.dot(normalized_movies, normalized_movies[movie_to_idx[movie]])
@@ -46,14 +43,14 @@ def masterlist(movie):
     URL = "https://en.wikipedia.org/w/api.php"
     S = requests.Session()
     for c in reversed(closest):
-        similar_movies.append(movies[c])
+        similar_movies.append(movies.iloc[c])
     for i in range(len(similar_movies)):
         PARAMS = {
             "action": "query",
             "format": "json",
             "prop": "imageinfo",
             "iiprop": "url",
-            "titles": "File:"+str(similar_movies[i][1]['image'])}
+            "titles": "File:"+str(similar_movies[i]['imgdata'])}
         R = S.get(url=URL, params=PARAMS)
         DATA = R.json()
         PAGES = DATA["query"]["pages"]
@@ -62,7 +59,7 @@ def masterlist(movie):
             image_info = page["imageinfo"][0]
             image_url = image_info["url"]
             pages.append(image_url)
-            ignored.append(similar_movies[i][0])
+            ignored.append(similar_movies[i]['name'])
             temp.append(i)
         except KeyError:
             continue
@@ -85,13 +82,6 @@ def masterlist(movie):
 
 
 # In[ ]:
-
-with open('movieslist.ndjson') as fin:
-    movies = [json.loads(l) for l in fin]
-
-# Remove non-movie articles
-movies_with_wikipedia = [movie for movie in movies if 'Wikipedia:' in movie[0]]
-movies = [movie for movie in movies if 'Wikipedia:' not in movie[0]]
 
 
 @app.route('/')
