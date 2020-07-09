@@ -97,6 +97,7 @@ def predict():
     # get data
     try:
         text = request.form['u']
+        text=text.capitalize()
         predict=masterlist(text)
         return render_template('index.html', Passmessage="Similar Movies for", suggestions=predict,currentmovie=text)
     except KeyError:
