@@ -86,7 +86,7 @@ def masterlist(movie):
 
 # In[ ]:
 
-with open('p27_1_movies.ndjson','r') as fin:
+with open('movieslist.ndjson') as fin:
     movies = [json.loads(l) for l in fin]
 
 # Remove non-movie articles
