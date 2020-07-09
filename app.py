@@ -10,6 +10,7 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import simplejson
 import requests
+import json
 
 
 
@@ -85,8 +86,8 @@ def masterlist(movie):
 
 # In[ ]:
 
-with open('found_movies.ndjson') as fin:
-    movies = [simplejson.loads(l) for l in fin]
+with open('p27_1_movies.ndjson','r') as fin:
+    movies = [json.loads(l) for l in fin]
 
 # Remove non-movie articles
 movies_with_wikipedia = [movie for movie in movies if 'Wikipedia:' in movie[0]]
